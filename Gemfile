@@ -5,7 +5,7 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'activerecord-postgresql-adapter'
 
 
 # Gems used only for assets and not required
@@ -21,6 +21,16 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+gem 'execjs', :git => 'git://github.com/jmataya/execjs.git', :branch => 'issue-81'
+
+gem 'haml'
+
+gem "paperclip", "~> 3.0"
+
+# gem 'node'
+# gem 'therubyracer'
+# gem 'libv8', '~> 3.11.8'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

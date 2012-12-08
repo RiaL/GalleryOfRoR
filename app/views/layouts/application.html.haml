@@ -1,0 +1,46 @@
+%html(xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en")
+%head
+  %title GalleryOfRoR
+
+  = stylesheet_link_tag    "application", :media => "all" 
+  = javascript_include_tag "application" 
+  = csrf_meta_tags 
+
+
+  %body
+
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %a{:class => "btn btn-navbar", :data => {:toggle => "collapse", :target => ".nav-collapse"}}
+            %span(class="icon-bar")
+            %span(class="icon-bar")
+            %span(class="icon-bar")
+          %a{:class => "brand", :href => "/categories"} Gallery of RoR
+          .nav-collapse.collapse
+            %p{:class => "navbar-text pull-right"}
+              Tu wrzucić całe logowanie ewentualne
+            %ul{:class => "nav"}
+              %li{:class => "active"} 
+                %a{:href => "/categories"} Strona główna
+              %li
+                %a{:href => "#"} O?
+  %br
+
+    .container-fluid
+      .row-fluid
+        .span3
+          .well.sidebar-nav
+            %ul{:class => "nav nav-list"}
+              %li{:class => "nav-header"} Kategorie
+
+              %li{:class => "active"} Link
+              -Category.all.each do |category|
+                %li= link_to category.name, category
+              
+        .span9
+          .hero-unit
+            
+            = yield
+            
+            
