@@ -2,9 +2,9 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all(:order => "name")
+    #@categories = Category.all(:order => "name")
+    @categories = Category.paginate :per_page => 5, :page => params[:page], :order => 'name'
     
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @categories }
@@ -14,9 +14,10 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    
     @category = Category.find(params[:id])
     @photos = @category.photos
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @category }

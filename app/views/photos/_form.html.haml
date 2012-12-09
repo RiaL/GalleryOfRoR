@@ -1,0 +1,51 @@
+= form_for @photo, :html => {:multipart => true } do |f|
+   -if @photo.errors.any?
+      .error_explanation
+      %h2 
+      Zdjęcie nie może być zapisane:
+
+      %ul
+      -@photo.errors.full_messages.each do |msg|
+         %li= msg
+
+   %p
+      powalczyc z validacjami, bo jeszcze trzeba ustawic custom messages
+
+   .field
+      %br
+      = f.label :name, 'Tytuł' 
+      = f.text_field :name
+  
+   .filed
+      = f.label :picture, "Zdjęcie" 
+      %br
+      = f.file_field :picture
+  
+   .field
+      %br
+      = f.label :category_id, "Kategoria (tu trzeba jeszcze sporo pozmieniać)" 
+      %br
+      = f.text_field :category_id
+
+   .field
+      = f.label :description, "Opis"
+      %br
+      = f.text_area :description
+  
+   .field
+      = f.label :author, "Ma się wczytywać automatyczne - zalogowany użytkownik" 
+      %br
+      = f.text_field :author
+  
+   .field
+      = f.label :tags, "Tagi - poki co brak pomyslu" 
+      %br
+      = f.text_field :tags
+  
+   .field
+      = f.label :mark, "Ocena (defaultowo 1)"
+      %br
+      = f.text_field :mark
+   
+   .actions
+      = f.submit
