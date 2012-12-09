@@ -2,7 +2,8 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.all(:order => "name")
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     @category = Category.find(params[:id])
+    @photos = @category.photos
 
     respond_to do |format|
       format.html # show.html.erb

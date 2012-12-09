@@ -21,8 +21,10 @@
             %p{:class => "navbar-text pull-right"}
               Tu wrzucić całe logowanie ewentualne
             %ul{:class => "nav"}
-              %li{:class => "active"} 
+              %li 
                 %a{:href => "/categories"} Strona główna
+              %li
+                %a{:href => "/photos/new"} Dodaj zdjęcie
               %li
                 %a{:href => "#"} O?
   %br
@@ -33,9 +35,7 @@
           .well.sidebar-nav
             %ul{:class => "nav nav-list"}
               %li{:class => "nav-header"} Kategorie
-
-              %li{:class => "active"} Link
-              -Category.all.each do |category|
+              -Category.all(:order => "name").each do |category|
                 %li= link_to category.name, category
               
         .span9
