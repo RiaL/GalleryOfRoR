@@ -1,5 +1,6 @@
 GalleryOfRoR::Application.routes.draw do
-  
+  get 'tags/:tag', to: 'photos#index', as: :tag
+  #get 'photos/:id', to: 'photos#id'
   root :to => 'categories#index'
   
   get "categories/new"

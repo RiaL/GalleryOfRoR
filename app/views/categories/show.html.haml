@@ -12,13 +12,12 @@
   = link_to 'Usuń', @category, method: :delete, data: { confirm: 'Jesteś pewien?' }  
 %br   
 
--if(@category.photos != nil)  
-  -@photos=@category.photos.order('created_at DESC')
-  -@i=0  
-  -@photos.each do |photo|
-    %a{:href => '/photos/' + photo.id.to_s}= image_tag photo.picture.url(:medium)
-    -@i+=1
-    -if(@i%5 == 0)
-      -@i=0;
-      %br
+-@photos=@category.photos.order('created_at DESC')
+-@i=0  
+-@photos.each do |photo|
+  %a{:href => '/photos/' + photo.id.to_s}= image_tag photo.picture.url(:medium)
+  -@i+=1
+  -if(@i%5 == 0)
+    -@i=0;
+    %br
 %br  

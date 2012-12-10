@@ -18,29 +18,24 @@
   
    .filed
       = f.label :picture, "Zdjęcie" 
-      %br
       = f.file_field :picture
   
    .field
       %br
-      = f.label :category_id, "Kategoria (tu trzeba jeszcze sporo pozmieniać)" 
-      %br
-      = f.number_field :category_id
+      = f.label :category_id, "Kategoria:" 
+      = f.select :category_id, Category.all.map{ |c| [c.name, c.id]}
 
    .field
       = f.label :description, "Opis"
-      %br
       = f.text_area :description
   
    .field
       = f.label :author, "Ma się wczytywać automatyczne - zalogowany użytkownik" 
-      %br
       = f.text_field :author
   
    .field
-      = f.label :tags, "Tagi - poki co brak pomyslu" 
-      %br
-      = f.text_field :tags
+      = f.label :tag_list, "Tagi (oddzielone przecinkami)" 
+      = f.text_field :tag_list
   
    .field
       = f.label "Ocena (defaultowo 1)"

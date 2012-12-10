@@ -5,7 +5,8 @@ class CreatePhotos < ActiveRecord::Migration
       t.integer :category_id
       t.text :description
       t.string :author
-      t.string :tags
+      t.decimal :rating, :default => 0
+      t.integer :rates_count, :default => 0
 
       t.timestamps
     end

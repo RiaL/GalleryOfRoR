@@ -1,0 +1,30 @@
+%p{:id => "notice"}
+  = notice
+
+%p
+  %b= @photo.category.name
+  
+%p{:style => "text-align:center;"}
+  %center 
+    %h2= @photo.name	
+	
+%p
+  %center= image_tag @photo.picture.url
+
+%p
+  %b
+  = @photo.description
+
+%p
+  %b Autor:
+  = @photo.author
+
+%p
+  %b Tagi: 
+  = raw @photo.tag_list.map{|t| link_to t, tag_path(t) }.join(', ')
+
+%p
+  %b Ocena:
+
+= link_to 'Edit', edit_photo_path(@photo) |
+= link_to 'Back', photos_path

@@ -3,11 +3,8 @@
 %table
   %tr
     %th Name
-    %th Photo
     %th Description
     %th Author
-    %th Tags
-    %th Mark
     %th
     %th
     %th  
@@ -17,11 +14,9 @@
   
   %tr
     %td= photo.name
-    %td= photo.photo
     %td= photo.description
     %td= photo.author
-    %td= photo.tags
-    %td= photo.mark
+
     %td= link_to 'Show', photo
     %td= link_to 'Edit', edit_photo_path(photo)
     %td= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' }

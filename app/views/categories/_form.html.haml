@@ -1,0 +1,17 @@
+= form_for(@category) do |f|
+  -if @category.errors.any?
+    .error_explanation
+      %h2
+      Kategoria nie może być dodana:
+
+      %ul
+      -@category.errors.full_messages.each do |msg|
+        %li= msg
+
+  .field
+    = f.label :name, 'Nazwa'
+    = f.text_field :name
+  
+  .actions
+    = f.submit
+  
