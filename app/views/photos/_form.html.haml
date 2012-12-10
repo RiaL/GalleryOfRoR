@@ -25,7 +25,7 @@
       %br
       = f.label :category_id, "Kategoria (tu trzeba jeszcze sporo pozmieniać)" 
       %br
-      = f.text_field :category_id
+      = f.number_field :category_id
 
    .field
       = f.label :description, "Opis"
@@ -43,9 +43,7 @@
       = f.text_field :tags
   
    .field
-      = f.label :mark, "Ocena (defaultowo 1)"
-      %br
-      = f.text_field :mark
+      = f.label "Ocena (defaultowo 1)"
    
    .actions
       = f.submit

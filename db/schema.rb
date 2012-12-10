@@ -21,13 +21,10 @@ ActiveRecord::Schema.define(:version => 20121209091537) do
 
   create_table "photos", :force => true do |t|
     t.string   "name"
-    t.string   "photo"
     t.integer  "category_id"
     t.text     "description"
     t.string   "author"
-    t.date     "date"
     t.string   "tags"
-    t.decimal  "mark"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.string   "picture_file_name"
