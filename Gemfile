@@ -32,6 +32,7 @@ gem 'will_paginate', '~> 3.0.0'
 
 gem 'acts-as-taggable-on'
 
+gem 'devise'
 
 # gem 'node'
 # gem 'therubyracer'

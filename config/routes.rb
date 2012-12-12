@@ -1,4 +1,6 @@
 GalleryOfRoR::Application.routes.draw do
+  devise_for :users, :path_names => { :sign_up => "rejestracja", :sign_in => "logowanie", :sign_out => "wyloguj" }
+
   get 'tags/:tag', to: 'photos#index', as: :tag
   #get 'photos/:id', to: 'photos#id'
   root :to => 'categories#index'

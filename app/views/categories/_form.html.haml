@@ -12,7 +12,8 @@
     %br
     = f.label :name, 'Nazwa'
     = f.text_field :name
-  
-  .actions
-    = f.submit
+    
+  -if((current_user != nil) and (current_user.is_admin == true))   
+    .actions
+      = f.submit "Utwórz kategorie"
   

@@ -1,14 +1,8 @@
-%p{:id=> "notice"} 
-  =notice
-
 %p
   %h2= @category.name
 
--if(true == true)  
+-if((current_user != nil) and (current_user.is_admin == true)) 
   = link_to 'Edytuj', edit_category_path(@category)  
-    
-
--if(true == true)  
   = link_to 'Usuń', @category, method: :delete, data: { confirm: 'Jesteś pewien?' }  
 %br   
 

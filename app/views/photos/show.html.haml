@@ -1,5 +1,6 @@
-%p{:id => "notice"}
-  = notice
+-if((current_user != nil) and (current_user.username == @photo.author))
+  =link_to 'Edytuj', edit_photo_path(@photo)
+  %br
 
 %p
   %b= @photo.category.name
@@ -25,6 +26,3 @@
 
 %p
   %b Ocena:
-
-= link_to 'Edit', edit_photo_path(@photo) |
-= link_to 'Back', photos_path

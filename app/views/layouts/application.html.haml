@@ -19,7 +19,14 @@
           %a{:class => "brand", :href => "/categories"} Gallery of RoR
           .nav-collapse.collapse
             %p{:class => "navbar-text pull-right"}
-              Tu wrzucić całe logowanie ewentualne
+              -if user_signed_in?
+                Jesteś zalogowany jako
+                =current_user.username
+                =link_to "Wyloguj się", destroy_user_session_path, :method => :delete
+              -else
+                =link_to "Utwórz konto", new_user_registration_path 
+                albo
+                = link_to "Zaloguj się", new_user_session_path
             %ul{:class => "nav"}
               %li 
                 %a{:href => "/categories"} Strona główna
@@ -27,7 +34,8 @@
                 %a{:href => "/photos/new"} Dodaj zdjęcie
               -if(true == true)  
                 %li
-                  %a{:href => "/categories/new"} Dodaj kategorie
+                  -if((current_user != nil) and (current_user.is_admin == true))
+                    %a{:href => "/categories/new"} Dodaj kategorie
               %li
                 %a{:href => "#"} O?
   %br
@@ -40,16 +48,23 @@
               %li{:class => "nav-header"} Kategorie
               -Category.all(:order => "name").each do |category|
                 %li= link_to category.name, category
+          .well.sidebar-nav
+            %ul{:class => "nav nav-list"}
+              %li{:class => "nav-header"} Tagi:
+            .tag_cloud
+              -tag_cloud Photo.tag_counts.order("name"), %w{s m l} do |tag, css_class|
+                = link_to tag.name, tag_path(tag.name), class: css_class
               
         .span9
-          .hero-unit
-           
-            .tag_cloud
-              -tag_cloud Photo.tag_counts, %w{s m l} do |tag, css_class|
-                = link_to tag.name, tag_path(tag.name), class: css_class
-                
+          .hero-unit 
+             
+            %p{:id => "notice"}
+              = notice
+            %p{:id => "alert"}  
+              = alert
+              
 
-            
+
             = yield
             
             

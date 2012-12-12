@@ -6,6 +6,9 @@ pl:
       photo:
         name: "Nazwa"
         picture: "Zdjęcie"
+      user:
+        email: "Mail"
+        password: "Hasło"
     errors:
       models:
         category:
@@ -17,4 +20,27 @@ pl:
             name:
               blank: "nie może być pusta"
             picture:
-              blank: "nie może być puste"              
+              blank: "nie może być puste"
+        user:
+          attributes:
+            email:
+              blank: "nie może być pusty"
+            password:
+              blank: "nie może być puste"
+              confirmation: "hasła nie zgadzają się"
+  errors:
+    messages:
+      not_saved: "Nie zarejestrowano"      
+  devise:
+    sessions:
+      user:
+        signed_in: "Zalogowano pomyślnie"
+        signed_out: "Wylogowano"
+    registrations:
+      user:
+        signed_up: "Zarejestrowano pomyślnie"
+    failure:
+      user:
+        invalid: "Błędny użytkownik"
+      already_authenticated: "Już jesteś zalogowany"
+      unauthenticated: "Musisz być zalogowany"
