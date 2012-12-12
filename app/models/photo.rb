@@ -5,6 +5,7 @@ class Photo < ActiveRecord::Base
   validates_attachment_presence :picture
   validates_attachment_size :picture, :less_than => 5.megabytes
   validates_attachment_content_type :picture, :content_type => ['image/jpeg', 'image/png']
-  validates_presence_of :name, :message => "Nazwa musi byc"
+  validates :name, presence: true
   acts_as_taggable
+  scope :created_last_5, order('created_at desc').limit('5')
 end

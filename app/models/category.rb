@@ -3,5 +3,5 @@ class Category < ActiveRecord::Base
   has_many :photos, :dependent => :delete_all
   # befor_filter
   # railscast #23
-  validates_presence_of :name, :message => "Nazwa musi byc"
+  validates :name, presence: true
 end

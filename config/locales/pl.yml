@@ -1,0 +1,20 @@
+pl: 
+  activerecord:
+    attributes:
+      category:
+        name: "Nazwa"
+      photo:
+        name: "Nazwa"
+        picture: "Zdjęcie"
+    errors:
+      models:
+        category:
+          attributes:
+            name:
+              blank: "nie może być pusta"
+        photo:
+          attributes:
+            name:
+              blank: "nie może być pusta"
+            picture:
+              blank: "nie może być puste"              

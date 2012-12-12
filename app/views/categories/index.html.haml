@@ -6,8 +6,8 @@
 
    %h3= link_to category.name, category
    %p
-   -category.photos.order('created_at desc').limit('5').each do |photo|
-      %a{:href => '/photos/' + photo.id.to_s}= image_tag photo.picture.url(:small)
+   -category.photos.created_last_5.each do |photo|
+      %a{:href => photo_path(photo)}= image_tag photo.picture.url(:small)
    %p 
    %a{:class => "btn btn-primary btn-large", :href => "categories/" + category.id.to_s} Więcej &raquo;
    %br
