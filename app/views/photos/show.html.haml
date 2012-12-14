@@ -1,7 +1,8 @@
 -if((current_user != nil) and (current_user.username == @photo.author))
   =link_to 'Edytuj', edit_photo_path(@photo)
+  |
+  = link_to 'Usuń', @photo, method: :delete, data: { confirm: 'Jesteś pewien?' }  
   %br
-
 %p
   %b= @photo.category.name
   
@@ -26,3 +27,20 @@
 
 %p
   %b Ocena:
+  = '%.2f' % @photo.rating
+  
+%p
+  %b Ilość ocen:
+  = @photo.rates_count
+
+-if(current_user != nil)
+  %p
+    %b Twoja ocena:
+    -@rates = @photo.rates.where(:user_id => current_user.id).to_a
+    -if(@rates != [])
+      =@rates.first.value.to_i
+    -else
+      =form_for (@photo) do |f|
+        = f.select :rating, 1..5
+        %br
+        = f.submit "Oceń"    

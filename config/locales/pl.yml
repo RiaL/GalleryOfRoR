@@ -44,3 +44,6 @@ pl:
         invalid: "Błędny użytkownik"
       already_authenticated: "Już jesteś zalogowany"
       unauthenticated: "Musisz być zalogowany"
+  will_paginate:
+    previous_label: "<- Poprzednia strona"
+    next_label: "Następna strona ->"

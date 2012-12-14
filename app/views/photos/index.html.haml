@@ -1,31 +1,24 @@
-%h1 Listing photos
+%h2 Zdjęcia
 
-%h1 Tu jeszcze trzeba całe to przerobic
-%h1 5 wierszy po 5 kolumn, na dole stronicowanie, pod kazdym zdjeciem widoczne usun (tylko dla admina)
-
+-@i=0
 %table
-  %tr
-    %th Name
-    %th Description
-    %th Author
-    %th
-    %th
-    %th  
-  %tr
-    
-- @photos.each do |photo|
+  %tr   
+    -@photos.each do |photo|
+      %td
+        %a{:href => photo_path(photo)}= image_tag photo.picture.url(:medium)
+        -if((current_user != nil) and (current_user.is_admin == true))
+          %center
+            =link_to 'Usuń', photo, method: :delete, data: { confirm: 'Jesteś pewien?' }
+        -else
+          %br
+          %br
+        -@i+=1
+        -if(@i%5 == 0)
+          -@i=0;
+          %tr
+          %br
   
-  %tr
-    %td= photo.name
-    %td= photo.description
-    %td= photo.author
-
-    %td= link_to 'Show', photo
-    %td= link_to 'Edit', edit_photo_path(photo)
-    %td= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' }
-  %tr
-
 %br
 %br
 
-= link_to 'New Photo', new_photo_path 
+= will_paginate @photos

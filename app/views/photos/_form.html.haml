@@ -20,7 +20,7 @@
    .field
       %br
       = f.label :category_id, "Kategoria:" 
-      = f.select :category_id, Category.all.map{ |c| [c.name, c.id]}
+      = f.select :category_id, Category.order("name").all.map{ |c| [c.name, c.id]}
 
    .field
       = f.label :description, "Opis"
@@ -29,9 +29,11 @@
    .field
       = f.label :tag_list, "Tagi (oddzielone przecinkami)" 
       = f.text_field :tag_list
-  
-   .field
-      = f.label "Ocena (defaultowo 1)"
-   
+
+   -if(@photo.rating == 0)
+      .field
+         = f.label :rating, "Twoja ocena: " 
+         = f.select :rating, 1..5
+      
    .actions
       = f.submit "Dodaj zdjęcie"

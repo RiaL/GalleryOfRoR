@@ -19,6 +19,7 @@ class CategoriesController < ApplicationController
   def show
     
     @category = Category.find(params[:id])
+    @photos_paginate = @category.photos.paginate :per_page => 25, :page => params[:page], :order => "created_at desc"
     
     respond_to do |format|
       format.html # show.html.erb

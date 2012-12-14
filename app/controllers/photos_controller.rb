@@ -6,9 +6,9 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     if params[:tag]
-      @photos = Photo.tagged_with(params[:tag])
+      @photos = Photo.tagged_with(params[:tag]).paginate :per_page => 25, :page => params[:page], :order => 'created_at desc'
     else
-      @photos = Photo.all
+      @photos = Photo.paginate :per_page => 25, :page => params[:page], :order => 'created_at desc'
     end
     
 
@@ -21,7 +21,7 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    @photo = Photo.find(params[:id])
+    @photo = Photo.find(params[:id], :include => :rates)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -53,6 +53,11 @@ class PhotosController < ApplicationController
     
     respond_to do |format|
       if @photo.save
+        @rate = Rate.new
+        @rate.photo_id = @photo.id
+        @rate.user_id = current_user.id
+        @rate.value = @photo.rating
+        @rate.save;
         format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
         format.json { render json: @photo, status: :created, location: @photo }
       else
@@ -66,9 +71,21 @@ class PhotosController < ApplicationController
   # PUT /photos/1.json
   def update
     @photo = Photo.find(params[:id])
-
+    unless(Rate.where(:user_id => current_user.id, :photo_id => @photo.id).to_a != [])
+      @rate = Rate.new
+      @rate.photo_id = @photo.id
+      @rate.user_id = current_user.id
+      @rate.value = @photo.rating
+    end
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
+        unless(Rate.where(:user_id => current_user.id, :photo_id => @photo.id).to_a != [])
+          tmp = @photo.rating
+          @photo.rating =((@rate.value * @photo.rates_count) + @photo.rating )/(@photo.rates_count + 1)
+          @rate.value = tmp
+          @rate.save
+          @photo.save       
+        end       
         format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
       else
